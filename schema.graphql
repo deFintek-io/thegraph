@@ -1,0 +1,10 @@
+type Swap @entity {
+  id: ID!
+  sender: Bytes! # 地址類型
+  recipient: Bytes!
+  amount0: BigInt! # 數字類型
+  amount1: BigInt!
+  logIndex: BigInt!
+  transactionHash: Bytes!
+}
+

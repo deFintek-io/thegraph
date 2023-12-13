@@ -1,0 +1,25 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: UniswapV3Pool
+    network: arbitrum-one
+    source:
+      address: "0xc31e54c7a869b9fcbecc14363cf510d1c41fa443" # Arbitrum USDC.e/ETH 0.5% pool
+      abi: UniswapV3Pool
+      startBlock: 1234567 # 請替換為實際的啟動塊號
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Swap
+      abis:
+        - name: UniswapV3Pool
+          file: ./abis/UniswapV3Pool.json
+      eventHandlers:
+        - event: Swap(indexed address,indexed address,uint256,uint256,uint256,uint256,int256,int256,uint160,uint128,uint256)
+          handler: handleSwap
+      file: ./src/mapping.ts
+
